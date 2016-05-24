@@ -32,9 +32,9 @@
                 </div>
 
                 <!-- Logo -->
-                <!--<a class="navbar-brand" href="">
-                    {!! Html::image('images/mono-logo.png', 'logo', ['style' => 'height: 32px;']) !!}
-                </a>-->
+                <a class="navbar-brand" href="">
+                    upimgs.net<!--{!! Html::image('images/mono-logo.png', 'logo', ['style' => 'height: 32px;']) !!}-->
+                </a>
             </div>
 
             <div class="collapse navbar-collapse" id="navbar-collapse">
