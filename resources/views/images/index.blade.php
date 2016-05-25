@@ -12,6 +12,7 @@
             <tr>
                 <th>#</th>
                 <th>File</th>
+                <th>Date</th>
                 <th class="text-right">Actions</th>
             </tr>
 
@@ -19,6 +20,7 @@
                 <tr>
                     <td>{{ $image->id }}</td>
                     <td>{{ $image->path }}</td>
+                    <td>{{ $image->created_at }}</td>
                     <td class="text-right">
                         <a class="btn btn-xs btn-success" href="{{ URL::to('admin/images/' . $image->id) }}">Show</a>
                         &nbsp;
