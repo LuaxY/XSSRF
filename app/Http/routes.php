@@ -17,6 +17,8 @@ Route::get('/', function () {
 
 Route::post('/upload', 'ImageController@upload');
 
+Route::get('/{image}', 'ImageController@image');
+
 Route::group(['prefix' => 'admin'], function()
 {
     Route::resource('images', 'ImageController');

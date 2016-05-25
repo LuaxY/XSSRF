@@ -123,4 +123,9 @@ class ImageController extends Controller
 
         return json_encode($reponse);
     }
+
+    public function Image($image)
+    {
+        return redirect('/i/' . $image);
+    }
 }
