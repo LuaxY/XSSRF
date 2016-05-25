@@ -6,11 +6,11 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-use App\Exploit;
+use App\Faker;
 
 use Validator;
 
-class ExploitController extends Controller
+class FakerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,9 +19,9 @@ class ExploitController extends Controller
      */
     public function index()
     {
-        $exploits = Exploit::all();
+        $fakers = Faker::all();
 
-        return view('exploits.index', ['exploits' => $exploits]);
+        return view('fakers.index', ['fakers' => $fakers]);
     }
 
     /**
@@ -31,7 +31,7 @@ class ExploitController extends Controller
      */
     public function create()
     {
-        return view('exploits.create');
+        return view('fakers.create');
     }
 
     /**
@@ -42,23 +42,23 @@ class ExploitController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), Exploit::$rules);
+        $validator = Validator::make($request->all(), Faker::$rules);
 
         if ($validator->fails())
         {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $exploit = new Exploit;
-        $exploit->name        = $request->input('name');
-        $exploit->description = $request->input('description');
-        $exploit->code        = $request->input('code');
-        $exploit->faker_id    = $request->input('faker_id');
-        $exploit->save();
+        $faker = new Faker;
+        $faker->name        = $request->input('name');
+        $faker->description = $request->input('description');
+        $faker->filename    = $request->input('filename');
+        $faker->html        = $request->input('html');
+        $faker->save();
 
-        session()->flash('message', 'Successfully created exploit!');
+        session()->flash('message', 'Successfully created faker!');
 
-        return redirect('admin/exploits');
+        return redirect('admin/fakers');
     }
 
     /**
@@ -69,9 +69,9 @@ class ExploitController extends Controller
      */
     public function show($id)
     {
-        $exploit = Exploit::findOrFail($id);
+        $faker = Faker::findOrFail($id);
 
-        return view('exploits.show', ['exploit' => $exploit]);
+        return view('fakers.show', ['faker' => $faker]);
     }
 
     /**
@@ -82,9 +82,9 @@ class ExploitController extends Controller
      */
     public function edit($id)
     {
-        $exploit = Exploit::findOrFail($id);
+        $faker = Faker::findOrFail($id);
 
-        return view('exploits.edit', ['exploit' => $exploit]);
+        return view('fakers.edit', ['faker' => $faker]);
     }
 
     /**
@@ -96,23 +96,23 @@ class ExploitController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), Exploit::$rules);
+        $validator = Validator::make($request->all(), Faker::$rules);
 
         if ($validator->fails())
         {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $exploit = Exploit::findOrFail($id);
-        $exploit->name        = $request->input('name');
-        $exploit->description = $request->input('description');
-        $exploit->code        = $request->input('code');
-        $exploit->faker_id    = $request->input('faker_id');
-        $exploit->save();
+        $faker = Faker::findOrFail($id);
+        $faker->name        = $request->input('name');
+        $faker->description = $request->input('description');
+        $faker->filename    = $request->input('filename');
+        $faker->html        = $request->input('html');
+        $faker->save();
 
-        session()->flash('message', 'Successfully updated exploit!');
+        session()->flash('message', 'Successfully updated faker!');
 
-        return redirect('admin/exploits');
+        return redirect('admin/fakers');
     }
 
     /**
@@ -123,11 +123,11 @@ class ExploitController extends Controller
      */
     public function destroy($id)
     {
-        $exploit = Exploit::findOrFail($id);
-        $exploit->delete();
+        $faker = Faker::findOrFail($id);
+        $faker->delete();
 
-        session()->flash('message', 'Successfully deleted exploit!');
+        session()->flash('message', 'Successfully deleted faker!');
 
-        return redirect('admin/exploits');
+        return redirect('admin/fakers');
     }
 }

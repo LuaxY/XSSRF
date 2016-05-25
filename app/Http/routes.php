@@ -15,7 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::post('/upload', 'ImageController@upload');
+
 Route::group(['prefix' => 'admin'], function()
 {
+    Route::resource('images', 'ImageController');
+
     Route::resource('exploits', 'ExploitController');
+
+    Route::resource('fakers', 'FakerController');
 });
