@@ -27,7 +27,7 @@ class Image extends Model
     public function serialize()
     {
         $result = new \stdClass;
-        $result->name = $this->path;
+        $result->name = $this->realname;
         $result->url  = $this->filename;
         $result->size = $this->size;
         return $result;

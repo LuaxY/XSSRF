@@ -19,10 +19,11 @@
             @foreach($images as $image)
                 <tr>
                     <td>{{ $image->id }}</td>
-                    <td>{{ $image->path }}</td>
+                    <td>{{ $image->realname }}</td>
                     <td>{{ $image->created_at }}</td>
                     <td class="text-right">
-                        <a class="btn btn-xs btn-success" href="{{ URL::to('admin/images/' . $image->id) }}">Show</a>
+                        <a class="btn btn-xs btn-success" href="{{ URL::to('i/' . $image->filename) }}">Show</a>
+                        <a class="btn btn-xs btn-info" href="{{ URL::to('admin/images/' . $image->id . '/edit') }}">Edit</a>
                         &nbsp;
                         {{ Form::open(['url' => URL::to('admin/images/' . $image->id), 'class' => 'pull-right']) }}
                             {{ Form::hidden('_method', 'DELETE') }}

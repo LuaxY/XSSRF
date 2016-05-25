@@ -87,7 +87,15 @@ class ImageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $image = Image::findOrFail($id);
+
+        unlink(base_path() . '/public/i/' . $image->filename);
+
+        $image->delete();
+
+        session()->flash('message', 'Successfully deleted image!');
+
+        return redirect('admin/images');
     }
 
     public function upload(Request $request)
@@ -110,11 +118,11 @@ class ImageController extends Controller
             $filename = str_random(8) . '.' . $file->getClientOriginalExtension();
 
             $image = new Image;
-            $image->path = $file->getClientOriginalName();
+            $image->filename = $filename;
+            $image->realname = $file->getClientOriginalName();
             $image->save();
 
-            $image->filename = $filename;
-            $image->size     = $file->getSize();
+            $image->size = $file->getSize();
 
             $file->move(base_path() . '/public/i/' , $filename);
 
@@ -124,7 +132,7 @@ class ImageController extends Controller
         return json_encode($reponse);
     }
 
-    public function Image($image)
+    public function image($image)
     {
         return redirect('/i/' . $image);
     }
