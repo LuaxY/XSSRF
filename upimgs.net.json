@@ -1,0 +1,11 @@
+{
+  "Name": "upimgs.net",
+  "RequestType": "POST",
+  "RequestURL": "https://upimgs.net/upload",
+  "Arguments": {
+    "nolimit": true,
+  },
+  "FileFormName": "files[]",
+  "ResponseType": "Text",
+  "URL": "https://upimgs.net/$json:files[0].url$"
+}

@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use App\Image;
+
+use Validator;
+
 class ImageController extends Controller
 {
     /**
@@ -15,7 +19,9 @@ class ImageController extends Controller
      */
     public function index()
     {
-        //
+        $images = Image::all();
+
+        return view('images.index', ['images' => $images]);
     }
 
     /**
@@ -87,17 +93,32 @@ class ImageController extends Controller
     public function upload(Request $request)
     {
         $reponse = new \stdClass;
+
+        $validator = Validator::make($request->all(), Image::$rules['upload']);
+
+        if ($validator->fails())
+        {
+            $reponse->success = false;
+            return response(json_encode($reponse), 415);
+        }
+
         $reponse->success = true;
         $reponse->files = [];
 
-        foreach ($request->file('files') as $image)
+        foreach ($request->file('files') as $file)
         {
-            $file = new \stdClass;
-            $file->name = $image->getClientOriginalName();
-            $file->url = 'rohinxn.png';
-            $file->size = $image->getSize();
+            $filename = str_random(8) . '.' . $file->getClientOriginalExtension();
 
-            $reponse->files[] = $file;
+            $image = new Image;
+            $image->path = $file->getClientOriginalName();
+            $image->save();
+
+            $image->filename = $filename;
+            $image->size     = $file->getSize();
+
+            $file->move(base_path() . '/public/i/' , $filename);
+
+            $reponse->files[] = $image->serialize();
         }
 
         return json_encode($reponse);

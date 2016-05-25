@@ -143,8 +143,7 @@ $(function () {
 					break
 				case 413:
 					uploadFiles.addClass('error completed')
-					// Terrible work-around, but necessary since otherwise the '&hellip;' entity is left decoded
-					totalName.html($('<div/>').html('onii-chan, y-your upload is t-too big&hellip;').text());
+					totalName.html($('<div/>').html('your upload is too big').text());
 					break
 				default:
 					uploadFiles.addClass('error completed')
