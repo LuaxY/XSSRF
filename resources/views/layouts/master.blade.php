@@ -20,30 +20,10 @@
         <div class="container">
 
             <div class="navbar-header">
-
-                <!-- Responsive -->
-                <div class="hamburger">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-
                 <!-- Logo -->
-                <a class="navbar-brand" href="">
+                <a class="navbar-brand" href="{{ URL::to('/') }}">
                     upimgs.net<!--{!! Html::image('images/mono-logo.png', 'logo', ['style' => 'height: 32px;']) !!}-->
                 </a>
-            </div>
-
-            <div class="collapse navbar-collapse" id="navbar-collapse">
-
-                <!-- Nav Left -->
-                <ul class="nav navbar-nav">
-                    <li><a href="">Accueil</a></li>
-                </ul>
-
             </div>
         </div>
 
